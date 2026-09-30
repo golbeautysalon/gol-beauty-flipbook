@@ -6,52 +6,71 @@
 <title>آلبوم سالن زیبایی گل</title>
 <style>
 *{box-sizing:border-box}
-body{margin:0;background:radial-gradient(circle at 50% 15%,#5b1831,#240713 70%);font-family:Tahoma,Arial,sans-serif;color:#fff;min-height:100vh;display:grid;place-items:center;padding:18px}
-.wrap{width:min(94vw,760px);text-align:center}
-.title{font-size:clamp(18px,3vw,28px);font-weight:700;margin:0 0 12px}
-.hint{font-size:14px;opacity:.85;margin-bottom:12px}
-.stage{position:relative;margin:auto;width:min(88vw,540px);aspect-ratio:3/4;perspective:1800px;touch-action:pan-y;user-select:none;-webkit-user-select:none}
-.book{position:absolute;inset:0;border-radius:14px;background:#fff;box-shadow:0 28px 60px #0009,0 0 0 2px #d7b26d,0 0 0 8px #661a36;overflow:hidden}
-.book:after{content:"";position:absolute;inset:0;pointer-events:none;box-shadow:inset -10px 0 16px #0002,inset 0 0 0 1px #0001}
-.page,.turn{position:absolute;inset:0;background:#fff;overflow:hidden;transform-style:preserve-3d}
-.page img,.face img{width:100%;height:100%;object-fit:contain;background:#fff;display:block}
-.turn{z-index:5;transform-origin:right center;will-change:transform;cursor:grab;display:none}
-.turn.dragging{cursor:grabbing}
-.face{position:absolute;inset:0;backface-visibility:hidden;background:#fff}
-.back{transform:rotateY(180deg)}
-.shade{position:absolute;inset:0;pointer-events:none;background:linear-gradient(90deg,rgba(0,0,0,.28),transparent 34%,rgba(255,255,255,.18));opacity:0}
-.edge{position:absolute;top:0;bottom:0;right:0;width:18px;background:linear-gradient(90deg,transparent,#0002);pointer-events:none}
-.counter{margin-top:14px;font-size:14px;opacity:.9}
-.controls{display:flex;gap:10px;justify-content:center;margin-top:12px;flex-wrap:wrap}
-button{border:1px solid #d7b26d;background:#fff;color:#4b1027;border-radius:999px;padding:10px 18px;font:inherit;cursor:pointer}
-button:disabled{opacity:.4;cursor:not-allowed}
-@media(max-width:480px){body{padding:10px}.stage{width:92vw}}
+html,body{margin:0;min-height:100%;font-family:Tahoma,Arial,sans-serif}
+body{min-height:100vh;background:radial-gradient(circle at 50% 20%,#742746,#3b0d20 55%,#18050c);color:#fff;display:flex;justify-content:center;align-items:center;overflow-x:hidden}
+.wrap{width:100%;max-width:1150px;text-align:center;padding:12px}
+h1{font-size:clamp(18px,3vw,28px);margin:0 0 5px}.hint{font-size:13px;opacity:.85;margin-bottom:10px}
+.book-shell{width:100%;height:min(76vh,700px);min-height:430px;display:flex;justify-content:center;align-items:center;filter:drop-shadow(0 25px 25px rgba(0,0,0,.55))}
+#book{margin:auto}
+.page{background:#fff;overflow:hidden;box-shadow:inset 0 0 18px rgba(0,0,0,.12)}
+.page img{width:100%;height:100%;object-fit:contain;object-position:center;display:block;background:#fff;pointer-events:none}
+.cover-page{background:#4f1029;border:6px solid #4f1029;box-shadow:inset 0 0 0 2px #c8a35d}
+.cover-page img{object-fit:cover;object-position:center}
+.back-cover{background:linear-gradient(135deg,#5a1630,#350b1d);display:flex;align-items:center;justify-content:center;border:6px solid #4f1029;box-shadow:inset 0 0 0 2px #c8a35d}
+.back-cover span{font-size:24px;font-weight:bold;color:#e3c785}
+.controls{display:flex;gap:10px;justify-content:center;margin-top:8px}
+button{border:1px solid #c8a35d;background:#fff;color:#501229;border-radius:999px;padding:9px 18px;font:inherit;cursor:pointer}
+.status{font-size:13px;margin-top:7px;opacity:.9}
+@media(max-width:700px){.book-shell{height:68vh;min-height:390px}.wrap{padding:7px}}
 </style>
 </head>
 <body>
 <div class="wrap">
-<div class="title">آلبوم سالن زیبایی گل</div>
-<div class="hint">صفحه را با انگشت یا ماوس بگیرید و به چپ یا راست بکشید.</div>
-<div class="stage" id="stage"><div class="book">
-<div class="page"><img id="current" alt="صفحه فعلی"></div>
-<div class="turn" id="turn"><div class="face front"><img id="front" alt=""></div><div class="face back"><img id="back" alt=""></div><div class="shade" id="shade"></div><div class="edge"></div></div>
-</div></div>
-<div class="counter" id="counter"></div>
-<div class="controls"><button id="prev">صفحه قبل</button><button id="next">صفحه بعد</button></div>
+<h1>آلبوم سالن زیبایی گل</h1>
+<div class="hint">جلد یا گوشه صفحه را با ماوس/انگشت بگیرید و ورق بزنید</div>
+<div class="book-shell">
+ <div id="book">
+   <div class="page back-cover" data-density="hard"><span>سالن زیبایی گل</span></div>
+   <div class="page"><img src="images/page4.jpg" alt="صفحه ۴"></div>
+   <div class="page"><img src="images/page3.jpg" alt="صفحه ۳"></div>
+   <div class="page"><img src="images/page2.jpg" alt="صفحه ۲"></div>
+   <div class="page"><img src="images/page1.png" alt="صفحه ۱"></div>
+   <div class="page cover-page" data-density="hard"><img src="images/cover.jpg" alt="جلد"></div>
+ </div>
 </div>
+
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/page-flip@2.0.7/dist/js/page-flip.browser.min.js"></script>
 <script>
-const pages=["images/01.jpg","images/02.png","images/03.jpg","images/04.jpg","images/05.jpg"];
-let index=0,dragging=false,startX=0,dx=0,direction=0,animating=false;
-const stage=document.getElementById('stage'),current=document.getElementById('current'),turn=document.getElementById('turn'),front=document.getElementById('front'),back=document.getElementById('back'),shade=document.getElementById('shade'),counter=document.getElementById('counter'),prev=document.getElementById('prev'),next=document.getElementById('next');
-function render(){current.src=pages[index];counter.textContent=`صفحه ${index+1} از ${pages.length}`;prev.disabled=index===0;next.disabled=index===pages.length-1}
-function setup(dir){if(animating)return false;if(dir===1&&index>=pages.length-1)return false;if(dir===-1&&index<=0)return false;direction=dir;turn.style.display='block';turn.style.transition='none';if(dir===1){front.src=pages[index];back.src=pages[index+1];turn.style.transformOrigin='right center';turn.style.transform='rotateY(0deg)'}else{front.src=pages[index-1];back.src=pages[index];turn.style.transformOrigin='left center';turn.style.transform='rotateY(-180deg)'}return true}
-function setProgress(p){p=Math.max(0,Math.min(1,p));const angle=direction===1?-180*p:-180+180*p;turn.style.transform=`rotateY(${angle}deg)`;shade.style.opacity=String(.45*Math.sin(Math.PI*p))}
-function finish(commit){animating=true;turn.classList.remove('dragging');turn.style.transition='transform .42s cubic-bezier(.2,.75,.25,1)';setProgress(commit?1:0);setTimeout(()=>{if(commit)index+=direction;turn.style.display='none';turn.style.transition='none';shade.style.opacity='0';dragging=false;animating=false;render()},430)}
-stage.addEventListener('pointerdown',e=>{if(animating)return;const r=stage.getBoundingClientRect();const dir=(e.clientX-r.left)>r.width*.52?1:-1;if(!setup(dir))return;dragging=true;startX=e.clientX;dx=0;turn.classList.add('dragging');stage.setPointerCapture?.(e.pointerId);e.preventDefault()});
-stage.addEventListener('pointermove',e=>{if(!dragging)return;dx=e.clientX-startX;const w=stage.getBoundingClientRect().width;setProgress(direction===1?Math.max(0,-dx/w):Math.max(0,dx/w))});
-function release(){if(!dragging)return;const w=stage.getBoundingClientRect().width;const p=direction===1?Math.max(0,-dx/w):Math.max(0,dx/w);finish(p>.22)}
-stage.addEventListener('pointerup',release);stage.addEventListener('pointercancel',release);
-function autoTurn(dir){if(!setup(dir))return;animating=true;turn.style.transition='transform .55s cubic-bezier(.2,.75,.25,1)';requestAnimationFrame(()=>requestAnimationFrame(()=>setProgress(1)));setTimeout(()=>{index+=dir;turn.style.display='none';turn.style.transition='none';animating=false;render()},570)}
-next.addEventListener('click',()=>autoTurn(1));prev.addEventListener('click',()=>autoTurn(-1));render();
+window.addEventListener("load", function(){
+ const status=document.getElementById("status");
+ if(!window.St || !St.PageFlip){
+   status.textContent="برای اجرای کتاب، اتصال اینترنت لازم است.";
+   return;
+ }
+ const pageFlip=new St.PageFlip(document.getElementById("book"),{
+   width:420,height:600,
+   size:"stretch",
+   minWidth:280,maxWidth:520,
+   minHeight:400,maxHeight:740,
+   maxShadowOpacity:.55,
+   showCover:true,
+   startZIndex:0,
+   mobileScrollSupport:false,
+   usePortrait:true,
+   flippingTime:900,
+   swipeDistance:20,
+   useMouseEvents:true,
+   autoSize:true,
+   drawShadow:true
+ });
+ pageFlip.loadFromHTML(document.querySelectorAll(".page"));
+ // Persian books begin with the front cover on the right.
+ setTimeout(()=>pageFlip.turnToPage(5), 80);
+ // Going forward means turning the right-hand leaf toward the left.
+});
 </script>
-</body></html>
+</body>
+</html>
